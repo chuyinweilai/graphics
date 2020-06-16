@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { 
+  // PIXIJS_BASIC,
+  PIXIJS_ROTATE,
+  // CACHEASBITMAP
+} from './pages/pixi';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default class App extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+
+    }
+  }
+
+  componentDidMount(){
+    let app = document.querySelector(".App");
+    // const pixi = new PIXIJS_BASIC(app);
+    const pixi = new PIXIJS_ROTATE(app);
+    // const pixi = new CACHEASBITMAP(app);
+    
+    
+    let init = {
+    }
+    pixi.init(init)
+  }
+
+  // setPixijs = () => {
+  // }
+  
+  render(){
+    return (
+      <div className="App">
+      </div>
+    )
+  }
 }
-
-export default App;
