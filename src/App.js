@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { 
-  // PIXIJS_BASIC,
-  PIXIJS_ROTATE,
-  // CACHEASBITMAP
-} from './pages/pixi';
+import * as pixis from './pages/pixi';
 
 
 export default class App extends Component{
@@ -16,23 +12,39 @@ export default class App extends Component{
   }
 
   componentDidMount(){
-    let app = document.querySelector(".App");
-    // const pixi = new PIXIJS_BASIC(app);
-    const pixi = new PIXIJS_ROTATE(app);
-    // const pixi = new CACHEASBITMAP(app);
-    
-    
-    let init = {
-    }
-    pixi.init(init)
   }
 
-  // setPixijs = () => {
-  // }
+  setPage = () => {
+    let page_keys = Object.keys(pixis)
+    return page_keys.map((val,index) => <li onClick={this.changePage.bind(this)} data-key={val} key={val}>{val}</li>);
+  }
+
+  changePage = (e) => {
+    let app = document.querySelector(".App");
+    app.innerHTML = ""
+    let key = e.currentTarget.dataset.key;
+    if(key === "home"){
+
+    } else {
+      let Foo = pixis[key]
+      const pixi = new Foo(app);
+      
+      let init = {
+        width:600, 
+        height:600, 
+      }
+      pixi.init(init)
+    }
+  }
   
   render(){
     return (
-      <div className="App">
+      <div className="Main">
+        <ul className="page-list">
+          <li data-key="home" onClick={this.changePage.bind(this)}>home</li>
+          {this.setPage()}
+        </ul>
+        <div className="App"></div>
       </div>
     )
   }

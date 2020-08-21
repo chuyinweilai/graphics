@@ -1,9 +1,9 @@
 import PIXIJS_BASIC from './basic';
 import PIXIJS_ROTATE from './rotate';
-import CACHEASBITMAP from './CacheAsBitmap';
+import PIXIJS_MOVE from './move';
 
 export {
     PIXIJS_BASIC,
     PIXIJS_ROTATE,
-    CACHEASBITMAP
+    PIXIJS_MOVE
 }

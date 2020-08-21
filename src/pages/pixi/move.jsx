@@ -29,9 +29,11 @@ export default function PIXIJS_ROTATE(ele) {
     this.app = null;
     this.container = null;
     this.ele = ele;
+    this.status_x = 0;  // X轴移动状态
+    this.status_y = 0;  // Y轴移动状态
 
     this.init = (obj = {})=> {
-        console.log("------rotate------")
+        console.log("------move------")
         const app = Init(obj,ele);
         this.app = app;
         this.addImage();
@@ -41,36 +43,28 @@ export default function PIXIJS_ROTATE(ele) {
     this.addImage = () => {
         let that = this;
         // 第一种写法
-        // const loader1 = PIXI.Loader.shared;
+        const loader1 = PIXI.Loader.shared;
         
         // 第二种写法
         const loader2 = new PIXI.Loader();
 
         const app = this.app;
+
         // PIXI.Loader.shared
         loader2.add("catPic", require("./images/cat.png"))
         .load(setup);
         // 另一种loader方法
-        // PIXI.Loader.shared
-        // .add("catPic", require("./images/cat.png"))
+        // PIXI.Loader.shared.add("catPic", require("./images/cat.png"))
         // .load(setup);
 
         //This `setup` function will run when the image has loaded
         function setup(loader, resources) {
             const container = new PIXI.Container();
-            // const ticker = PIXI.Ticker.shared;
             app.stage.addChild(container);
-            // Create a 5x5 grid of bunnies
             // 生成多次图片
-            // for (let i = 0; i < 25; i++) {
-                const texture = resources.catPic.texture;
-                const bunny = new PIXI.Sprite(texture);
-            //     // anchor设置锚点
-            //     bunny.anchor.set(0.5);
-            //     bunny.x = (i % 5) * (bunny.width + 10);
-            //     bunny.y = Math.floor(i / 5) * (bunny.height + 10);
-                container.addChild(bunny);
-            // }
+            const texture = resources.catPic.texture;
+            const bunny = new PIXI.Sprite(texture);
+            container.addChild(bunny);
             that.container = container;
     
             // Move container to the center
@@ -87,30 +81,44 @@ export default function PIXIJS_ROTATE(ele) {
             // ticker
             app.ticker.autoStart = false;
             app.ticker.add((delta) => {
-                // rotate the container!
-                // use delta to create frame-independent transform
-                // 旋转
-                container.rotation -= 0.01 * delta;
-    
-                // 移动
-                // container.x += 1;
-                // container.y += 1;
+                that.tickerLoop()
             });
-            app.ticker.stop();
-            setTimeout(() => {
-                // 定时开始
-                app.ticker.start();
-            }, 1000)
         }
     }
 
-    this.moveAnima = (X,Y) => {
+    this.tickerLoop = () => {
         const app = this.app;
         const container = this.container;
-
+        const {width = 800, height = 800} = app.screen;
         // 元素移动的速度属性
-        container.vx = app.screen.width / 2;
-        container.vy = app.screen.height / 2;
+        container.vx = 10;
+        container.vy = 3;
+        // X轴
+        if(this.status_x) {
+          container.x += container.vx;
+          if(container.x > width) {
+            this.status_x = 0;
+          }
+        } else {
+          container.x -= container.vx;
+          if(container.x < 0) {
+            this.status_x = 1;
+          }
+        }
+
+        // Y轴
+        if(this.status_y) {
+          container.y += container.vy;
+          if(container.y > height) {
+            this.status_y = 0;
+          }
+        } else {
+          container.y -= container.vy;
+          if(container.y < 0) {
+            this.status_y = 1;
+          }
+        }
+
     }
 
 }

@@ -32,10 +32,8 @@ export default function PIXIJSFOO(ele) {
         const imgUrl = this.imgUrl;
         // const loader = PIXI.Loader.shared;
         app.loader.add("Gunner",imgUrl).load(setup);
-        const sprites = {};
 
         function setup (){
-            console.log("app.loader.resources------>", app.loader.resources.Gunner)
             let TextureCache = PIXI.utils.TextureCache;
             const base = TextureCache["Gunner"];
             let texture0 = new PIXI.Texture(base)
@@ -48,29 +46,7 @@ export default function PIXIJSFOO(ele) {
             plane.y = 100;
             
             // 通过 stage.addChild方法,向Pixi舞台中添加元素。
-
             app.stage.addChild(plane);
-            // app.stage.addChild(plane1);
-            // app.stage.addChild(texture0);
-            // let TextureCache = PIXI.utils.TextureCache;
-            // let base = TextureCache[imgUrl]
-            // //  new PIXI.Rectangle (x, y, width, height)
-            // let texture0 = new PIXI.Texture(base)
-            // texture0.frame = new PIXI.Rectangle('0,0,80,143');
-            // //  new PIXI.Rectangle (x, y, width, height)
-            // let texture1 = new PIXI.Texture(base)
-            // texture1.frame = new PIXI.Rectangle('80,0,80,143');
-
-            // //  创建纹理组
-            // let textures = [texture0,texture1];
-            // // 创建动画精灵
-            // let pixie = new PIXI.AnimatedSprite(textures);
-            // // 设置动画精灵速度
-            // pixie.animationSpeed = 0.1;
-
-            // app.stage.addChild(pixie);
-
-            // pixie.play()
         }
     }
 
