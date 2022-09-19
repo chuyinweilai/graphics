@@ -1,6 +1,4 @@
-## [Pixijs V5](https://github.com/pixijs/pixi.js)
-## [中文教程Pixijs V5](https://hsiangfeng.github.io/tags/PixiJS-V5-%E6%95%99%E5%AD%B8/page/2/) 
-
-
-当前页面：move  
-学习到章节：9
+## 参考资料
+* 视频: https://www.bilibili.com/video/BV1Rt4y1775g?p=9&share_source=copy_web
+* Three.js: https://threejs.org/
+* WegbGL: https://developer.mozilla.org/zh-CN/docs/Web/API/WebGL_API
